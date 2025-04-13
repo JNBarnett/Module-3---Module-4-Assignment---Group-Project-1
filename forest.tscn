@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://bbbyeid018qme"]
 
-[ext_resource type="Texture2D" uid="uid://cura17dk4rw0y" path="res://Assets/tileset.png" id="1_lifw2"]
+[ext_resource type="Texture2D" uid="uid://cura17dk4rw0y" path="res://assets/tileset.png" id="1_lifw2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_stcry"]
 texture = ExtResource("1_lifw2")
@@ -44,7 +44,7 @@ tile_map_data = PackedByteArray("AAALAD0AAAAJAAUAAAAbAD0AAAAKAAUAAAALAC0AAAAJAAQ
 tile_set = SubResource("TileSet_vmuxp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(403, 238)
+position = Vector2(1676, 732)
 limit_left = 0
 limit_top = 0
 limit_right = 4000
