@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwifi2t6kwwq8"]
+
+[ext_resource type="Script" uid="uid://br474m1w33s57" path="res://scripts/hud.gd" id="1_ahhtf"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_ahhtf")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 640.0
+offset_bottom = 293.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

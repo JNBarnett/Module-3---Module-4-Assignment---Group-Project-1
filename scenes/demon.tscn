@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://buq6nvkrkiiur"]
+
+[ext_resource type="Script" uid="uid://b12nad5hv1vqm" path="res://scripts/enemy.gd" id="1_h17bh"]
+[ext_resource type="Texture2D" uid="uid://oo7odui66h11" path="res://assets/demon.png" id="2_3t42y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofewj"]
+atlas = ExtResource("2_3t42y")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yt4xr"]
+atlas = ExtResource("2_3t42y")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6uwn"]
+atlas = ExtResource("2_3t42y")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1cvy"]
+atlas = ExtResource("2_3t42y")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j12ep"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ofewj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yt4xr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6uwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1cvy")
+}],
+"loop": true,
+"name": &"front_walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkyue"]
+size = Vector2(31.2, 48.6)
+
+[node name="Demon" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 8
+collision_mask = 14
+script = ExtResource("1_h17bh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_j12ep")
+animation = &"front_walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -3.5)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_mkyue")
+
+[node name="LeftRay" type="RayCast2D" parent="."]
+target_position = Vector2(-125, 0)
+collision_mask = 10
+hit_from_inside = true
+
+[node name="RightRay" type="RayCast2D" parent="."]
+target_position = Vector2(125, 0)
+collision_mask = 10
+hit_from_inside = true

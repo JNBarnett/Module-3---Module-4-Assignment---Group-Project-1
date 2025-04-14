@@ -3,8 +3,8 @@ extends CharacterBody2D
 signal life_changed
 signal died
 
-@export var walk_speed = 100
-@export var max_speed = 200
+@export var walk_speed = 500
+@export var max_speed = 800
 
 enum {IDLE, WALK, HURT, DEAD, ATTACK}
 enum {NONE, UP, DOWN, LEFT, RIGHT}
@@ -37,6 +37,9 @@ func die() -> void:
 func set_life(value):
 	life = value	
 	life_changed.emit(life)
+
+func camera_update_limit(level):
+	$Camera2D.update_limit(level)
 	
 func get_input() -> Array:
 	if state == HURT:

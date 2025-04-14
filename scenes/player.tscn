@@ -1,7 +1,8 @@
-[gd_scene load_steps=85 format=3 uid="uid://d3ibake15v410"]
+[gd_scene load_steps=86 format=3 uid="uid://d3ibake15v410"]
 
 [ext_resource type="Texture2D" uid="uid://vsw638pyn2bi" path="res://assets/playersprites.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cc3cykws3feop" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://dk1m03nu5od4a" path="res://scripts/camera_2d.gd" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -504,7 +505,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8svfe")
 }],
-"loop": false,
+"loop": true,
 "name": &"side_attack",
 "speed": 5.0
 }, {
@@ -583,19 +584,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1da1t"]
-size = Vector2(32, 55)
+size = Vector2(158, 254)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
-radius = 5.82209
-height = 24.3635
+radius = 136.382
+height = 503.531
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
-radius = 34.1722
-height = 101.308
+radius = 35.6786
+height = 85.8629
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
-radius = 32.0
-height = 90.0
+radius = 28.6
+height = 92.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 4
@@ -603,31 +604,26 @@ collision_mask = 26
 script = ExtResource("1_g2els")
 
 [node name="front" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(-5.68434e-14, -5.68434e-14)
-scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_31cv2")
 animation = &"idle"
 
 [node name="back" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(-3.38813e-21, -1)
-scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_lxlsd")
-animation = &"back_attack"
-frame = 3
-frame_progress = 1.0
+animation = &"back_idle"
 
 [node name="side" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(-4, -4)
-scale = Vector2(0.2, 0.2)
+position = Vector2(-4, -13)
+scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_6c3st")
-animation = &"side_attack"
-frame = 3
-frame_progress = 1.0
+animation = &"side_walk"
+frame_progress = 0.725522
 
 [node name="PlayerCollison" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
+position = Vector2(-5, 0)
 shape = SubResource("RectangleShape2D_1da1t")
 
 [node name="Attack" type="Area2D" parent="."]
@@ -635,28 +631,38 @@ collision_layer = 4
 collision_mask = 24
 
 [node name="AttackBack" type="CollisionShape2D" parent="Attack"]
-position = Vector2(6, -27)
-rotation = 1.71042
-scale = Vector2(-5.19826, 4.49254)
+position = Vector2(27, -117)
+rotation = -1.31598
 shape = SubResource("CapsuleShape2D_g2els")
 disabled = true
 
 [node name="AttackFront" type="CollisionShape2D" parent="Attack"]
-position = Vector2(5, 8)
+position = Vector2(19, 29)
 rotation = -1.91463
+scale = Vector2(5, 5)
 shape = SubResource("CapsuleShape2D_qhqgy")
 disabled = true
 
 [node name="AttackRight" type="CollisionShape2D" parent="Attack"]
-position = Vector2(15, -2)
+position = Vector2(86, -1)
+scale = Vector2(5, 5)
 shape = SubResource("CapsuleShape2D_dqkch")
 disabled = true
 
 [node name="AttackLeft" type="CollisionShape2D" parent="Attack"]
-position = Vector2(-14, -2)
+position = Vector2(-105, -14)
+scale = Vector2(5, 5)
 shape = SubResource("CapsuleShape2D_dqkch")
 disabled = true
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.2, 0.2)
+limit_left = 0
+limit_top = 0
+limit_right = 4600
+limit_bottom = 3050
+script = ExtResource("3_qhqgy")
 
 [connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]

@@ -1,20 +1,20 @@
 extends CharacterBody2D
 
 
-@export var speed: float = 50  # Speed of the enemy
-@onready var sprite = $Sprite2D  # Reference to sprite
+@export var speed: float = 150  # Speed of the enemy
+@onready var sprite = $AnimatedSprite2D # Reference to sprite
 @onready var left_ray = $LeftRay  # Left-facing ray
 @onready var right_ray = $RightRay  # Right-facing ray
+@onready var collision = $CollisionShape2D
 
 var triggered = false
-var direction: int = -1  # -1 = left, 1 = right
+var direction: int = 1  # -1 = left, 1 = right
 
 func _physics_process(_delta):
 	if triggered:
 		return
 	# Move enemy left or right
 	velocity.x = direction * speed
-	print("increased bubbles speed", velocity)
 		# Check for collision using raycasts
 	if left_ray.is_colliding() and direction == -1:
 		flip_direction()
@@ -41,7 +41,11 @@ func take_damage() ->  void:
 	if triggered:
 		return
 	print("take damage was called")
+	call_deferred("disable_collision")
 	triggered = true
-	$Sprite2D.hide()
+	sprite.hide()
 	await get_tree().create_timer(3).timeout
 	queue_free()
+
+func disable_collision():
+	collision.disabled = true
