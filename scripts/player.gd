@@ -4,8 +4,8 @@ signal life_changed(life:int)
 signal died
 signal game_over
 
-@export var walk_speed = 500
-@export var max_speed = 800
+@export var walk_speed = 700
+@export var max_speed = 900
 
 enum {IDLE, WALK, HURT, DEAD, ATTACK}
 enum {NONE, UP, DOWN, LEFT, RIGHT}
@@ -140,7 +140,7 @@ func change_state(new_state):
 				DOWN:
 					$front.play("attack")
 					$Attack/AttackFront.disabled = false
-			await get_tree().create_timer(1).timeout
+			await get_tree().create_timer(0.4).timeout
 			for attack_box in $Attack.get_children():
 				attack_box.disabled = true
 				
@@ -151,7 +151,14 @@ func change_state(new_state):
 				change_state(IDLE)
 
 		HURT:
-			velocity.y = -200  # Apply some vertical velocity for hurt state (optional)
+			if direction == UP:
+				velocity.y = 200  # Apply some vertical velocity for hurt state (optional)
+			elif direction == DOWN:
+				velocity.y = -200  # Apply some vertical velocity for hurt state (optional)
+			elif direction == RIGHT:
+				velocity.y = -200  # Apply some vertical velocity for hurt state (optional)
+			elif  direction == LEFT:
+				velocity.y = 200  # Apply some vertical velocity for hurt state (optional)
 			set_life(life - 1)
 			await get_tree().create_timer(0.5).timeout
 			change_state(IDLE)
