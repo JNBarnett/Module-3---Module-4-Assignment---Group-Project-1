@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://5nrfu16e7h16" path="res://assets/tileset.png" id="1_6elmv"]
 [ext_resource type="PackedScene" uid="uid://ce62xrw1b7msy" path="res://scenes/loading_zone.tscn" id="2_c4wp1"]
-[ext_resource type="PackedScene" uid="uid://buq6nvkrkiiur" path="res://scenes/demon.tscn" id="3_fpimf"]
 [ext_resource type="PackedScene" uid="uid://cdjypwivlc0qi" path="res://scenes/archer.tscn" id="4_0wj4k"]
+[ext_resource type="PackedScene" uid="uid://buq6nvkrkiiur" path="res://scenes/demon.tscn" id="4_fvacq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qu0b2"]
 texture = ExtResource("1_6elmv")
@@ -66,17 +66,17 @@ collision_layer = 32
 collision_mask = 4
 target = 3
 
-[node name="Demon" parent="." instance=ExtResource("3_fpimf")]
-position = Vector2(1937, 1974)
-
-[node name="Demon2" parent="." instance=ExtResource("3_fpimf")]
-position = Vector2(3094, 1984)
-
-[node name="Demon3" parent="." instance=ExtResource("3_fpimf")]
-position = Vector2(3284, 1414)
-
 [node name="Archer" parent="." instance=ExtResource("4_0wj4k")]
-position = Vector2(1098, 1633)
+position = Vector2(1196, 1568)
 
 [node name="Archer2" parent="." instance=ExtResource("4_0wj4k")]
-position = Vector2(2134, 1612)
+position = Vector2(2191, 1591)
+
+[node name="Demon" parent="." instance=ExtResource("4_fvacq")]
+position = Vector2(1458, 2024)
+
+[node name="Demon2" parent="." instance=ExtResource("4_fvacq")]
+position = Vector2(2487, 2016)
+
+[node name="Demon3" parent="." instance=ExtResource("4_fvacq")]
+position = Vector2(3258, 1412)

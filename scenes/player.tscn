@@ -121,7 +121,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -150,7 +150,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -194,7 +194,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pf23h"]
@@ -314,7 +314,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"back_attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -343,7 +343,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"back_idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -387,7 +387,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"back_walk",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ha2mi"]
@@ -507,7 +507,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"side_attack",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -536,7 +536,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"side_idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -580,7 +580,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"side_walk",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1da1t"]
@@ -607,20 +607,19 @@ script = ExtResource("1_g2els")
 visible = false
 position = Vector2(-5.68434e-14, -5.68434e-14)
 sprite_frames = SubResource("SpriteFrames_31cv2")
-animation = &"idle"
+animation = &"attack"
 
 [node name="back" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(-3.38813e-21, -1)
 sprite_frames = SubResource("SpriteFrames_lxlsd")
-animation = &"back_idle"
+animation = &"back_attack"
 
 [node name="side" type="AnimatedSprite2D" parent="."]
 position = Vector2(-4, -13)
 scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_6c3st")
 animation = &"side_walk"
-frame_progress = 0.725522
 
 [node name="PlayerCollison" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 0)
