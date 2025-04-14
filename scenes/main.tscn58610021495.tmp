@@ -13,9 +13,9 @@ level1 = ExtResource("2_0wfyh")
 level2 = ExtResource("4_tbgi4")
 level3 = ExtResource("5_tbgi4")
 
-[node name="HUD" parent="." instance=ExtResource("6_tefeu")]
-
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
 
-[connection signal="game_over" from="Player" to="HUD" method="_on_player_game_over"]
+[node name="HUD" parent="." instance=ExtResource("6_tefeu")]
+
+[connection signal="ready_to_load" from="." to="HUD" method="_on_main_ready_to_load"]
 [connection signal="life_changed" from="Player" to="HUD" method="_on_player_life_changed"]

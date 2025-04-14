@@ -1,0 +1,94 @@
+[gd_scene load_steps=12 format=3 uid="uid://c5qtxft6rfp03"]
+
+[ext_resource type="Texture2D" uid="uid://eshmmiyei4qt" path="res://assets/mayor.png" id="1_4gx2u"]
+[ext_resource type="Script" uid="uid://cphc6vvl6qlw4" path="res://scripts/mayor.gd" id="1_6ka84"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ka84"]
+atlas = ExtResource("1_4gx2u")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl4rc"]
+atlas = ExtResource("1_4gx2u")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xweus"]
+atlas = ExtResource("1_4gx2u")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0qtu"]
+atlas = ExtResource("1_4gx2u")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dojj1"]
+atlas = ExtResource("1_4gx2u")
+region = Rect2(2048, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dlve"]
+atlas = ExtResource("1_4gx2u")
+region = Rect2(2560, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_at574"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ka84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cl4rc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xweus")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0qtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dojj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dlve")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8vpp"]
+size = Vector2(157, 315)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ka84"]
+radius = 285.0
+
+[node name="Mayor" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 14
+script = ExtResource("1_6ka84")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_at574")
+frame_progress = 0.177258
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-24.5, 38.5)
+shape = SubResource("RectangleShape2D_x8vpp")
+
+[node name="LeftRay" type="RayCast2D" parent="."]
+target_position = Vector2(-200, 0)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="RightRay" type="RayCast2D" parent="."]
+target_position = Vector2(200, 0)
+collision_mask = 2
+hit_from_inside = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-23, 41)
+shape = SubResource("CircleShape2D_6ka84")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
