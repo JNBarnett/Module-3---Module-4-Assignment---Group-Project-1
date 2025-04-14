@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
-signal life_changed
+signal life_changed(life:int)
 signal died
+signal game_over
 
 @export var walk_speed = 500
 @export var max_speed = 800
@@ -33,11 +34,12 @@ func hurt() -> void:
 func die() -> void:
 	if state != DEAD:
 		change_state(DEAD)
-		
+
 func set_life(value):
 	life = value	
 	life_changed.emit(life)
-
+	if life == 0:
+		game_over.emit()
 func camera_update_limit(level):
 	$Camera2D.update_limit(level)
 	
@@ -185,8 +187,8 @@ var attack_triggered = false
 func _on_attack_body_entered(body: Node2D) -> void:
 	if attack_triggered:
 		return
-	if body is CharacterBody2D and body.is_in_group("enemies"):
+	if body.is_in_group("enemies"):
 		attack_triggered = true
-		body.take_damage()
+		body.hurt()
 		attack_triggered = false
 	

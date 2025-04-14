@@ -1,12 +1,156 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwifi2t6kwwq8"]
+[gd_scene load_steps=6 format=3 uid="uid://bwifi2t6kwwq8"]
 
 [ext_resource type="Script" uid="uid://br474m1w33s57" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://crawiqdfh340r" path="res://assets/life.png" id="2_oo0fn"]
+[ext_resource type="Texture2D" uid="uid://dusk4ads1xe8m" path="res://assets/dialogue.png" id="3_5ysmq"]
 
-[node name="Hud" type="CanvasLayer"]
+[sub_resource type="LabelSettings" id="LabelSettings_6fi6k"]
+font_size = 46
+
+[sub_resource type="LabelSettings" id="LabelSettings_5ysmq"]
+font_size = 10
+
+[node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ahhtf")
 
-[node name="Button" type="Button" parent="."]
-offset_right = 640.0
-offset_bottom = 293.0
+[node name="StartMenu" type="CanvasLayer" parent="."]
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="ColorRect" type="ColorRect" parent="StartMenu"]
+offset_right = 647.0
+offset_bottom = 378.0
+color = Color(0.402676, 6.50968e-05, 0.374102, 1)
+
+[node name="Label" type="Label" parent="StartMenu"]
+offset_left = 1.0
+offset_top = -44.0
+offset_right = 641.0
+offset_bottom = 123.0
+text = "Legends of the Lost Light"
+label_settings = SubResource("LabelSettings_6fi6k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="StartMenu"]
+anchors_preset = -1
+anchor_left = -0.117
+anchor_top = 0.25
+anchor_right = -0.117
+anchor_bottom = 0.25
+offset_left = 278.88
+offset_top = 145.0
+offset_right = 514.88
+offset_bottom = 247.0
+text = "Start"
+
+[node name="Label2" type="Label" parent="StartMenu"]
+offset_left = 41.0
+offset_top = 63.0
+offset_right = 595.0
+offset_bottom = 280.0
+text = "Darkness has fallen over the land…
+
+The once peaceful village is now gripped by fear. Strange creatures have emerged from the shadows, and worst of all the village mayor has been kidnapped by demons.
+With no champions left to defend them, the villagers turned to an unlikely hero… you.
+
+Armed with courage, skill, and the will to fight, you must venture into the unknown, face the horrors that await, and rescue the mayor before it's too late.
+
+
+"
+label_settings = SubResource("LabelSettings_5ysmq")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="GameplayHUD" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Life1" type="Sprite2D" parent="GameplayHUD"]
+position = Vector2(18, 17)
+scale = Vector2(0.421875, 0.421875)
+texture = ExtResource("2_oo0fn")
+
+[node name="Life2" type="Sprite2D" parent="GameplayHUD"]
+position = Vector2(49, 18)
+scale = Vector2(0.421875, 0.421875)
+texture = ExtResource("2_oo0fn")
+
+[node name="Life3" type="Sprite2D" parent="GameplayHUD"]
+position = Vector2(82, 18)
+scale = Vector2(0.421875, 0.421875)
+texture = ExtResource("2_oo0fn")
+
+[node name="Success" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Success"]
+offset_right = 647.0
+offset_bottom = 378.0
+color = Color(3.60981e-07, 0.48488, 0.201937, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Success"]
+position = Vector2(325, 252)
+scale = Vector2(1.27188, 1.27188)
+texture = ExtResource("3_5ysmq")
+
+[node name="Mayor" type="Label" parent="Success"]
+offset_left = 146.0
+offset_top = 182.0
+offset_right = 612.0
+offset_bottom = 316.0
+text = "\"Thank you, brave hero, for saving me from that terrible demon. I thought I would never escape its clutches. Your courage and strength have given me a second chance at life. Now, I can finally return home to my village. I will never forget what you’ve done for me,\" said the Mayor."
+autowrap_mode = 3
+
+[node name="Label" type="Label" parent="Success"]
+offset_right = 640.0
+offset_bottom = 167.0
+text = "Mission Complete!"
+label_settings = SubResource("LabelSettings_6fi6k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fail" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Fail"]
+offset_right = 647.0
+offset_bottom = 378.0
+color = Color(0.631297, 0, 0.0388458, 1)
+
+[node name="Label" type="Label" parent="Fail"]
+offset_right = 640.0
+offset_bottom = 167.0
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_6fi6k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Fail"]
+anchors_preset = -1
+anchor_left = -0.117
+anchor_top = 0.25
+anchor_right = -0.117
+anchor_bottom = 0.25
+offset_left = 278.88
+offset_top = 145.0
+offset_right = 514.88
+offset_bottom = 247.0
+text = "Retry"
+
+[node name="Label2" type="Label" parent="Fail"]
+offset_left = 85.0
+offset_top = 100.0
+offset_right = 569.0
+offset_bottom = 279.0
+text = "I waited, hoping… praying… but you never came.
+They told stories of a hero who would save us. I believed them.
+But now… I see I was wrong.
+The village will fall. The darkness spreads. And hope… is lost.
+May the next hero be stronger than you.
+
+"
+label_settings = SubResource("LabelSettings_5ysmq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="StartMenu/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Fail/Button" to="." method="_on_button_pressed"]
