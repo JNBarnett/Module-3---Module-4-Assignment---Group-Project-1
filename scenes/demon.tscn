@@ -57,7 +57,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k1cvy")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -106,3 +106,10 @@ hit_from_inside = true
 target_position = Vector2(125, 0)
 collision_mask = 10
 hit_from_inside = true
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="AttackCooldownTimer" to="." method="_on_timer_timeout"]
