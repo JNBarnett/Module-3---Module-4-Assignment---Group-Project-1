@@ -620,6 +620,7 @@ position = Vector2(-4, -13)
 scale = Vector2(0.9, 0.9)
 sprite_frames = SubResource("SpriteFrames_6c3st")
 animation = &"side_walk"
+flip_h = true
 
 [node name="PlayerCollison" type="CollisionShape2D" parent="."]
 position = Vector2(-5, 0)
