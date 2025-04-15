@@ -12,6 +12,7 @@ enum {NONE, UP, DOWN, LEFT, RIGHT}
 
 var state = IDLE
 var direction = NONE
+var hurt_direction = NONE
 var reset_life = 3
 var life = 3
 
@@ -30,6 +31,7 @@ func hurt() -> void:
 	if state != HURT:
 		$HurtSound.play()
 		change_state(HURT)
+		hurt_direction = direction
 
 func die() -> void:
 	if state != DEAD:
@@ -44,8 +46,6 @@ func camera_update_limit(level):
 	$Camera2D.update_limit(level)
 	
 func get_input() -> Array:
-	if state == HURT:
-		return []  # Don't allow movement during hurt state
 	
 	# Get player input
 	var right = Input.is_action_pressed("right")
@@ -151,14 +151,6 @@ func change_state(new_state):
 				change_state(IDLE)
 
 		HURT:
-			if direction == UP:
-				velocity.y = 200  # Apply some vertical velocity for hurt state (optional)
-			elif direction == DOWN:
-				velocity.y = -200  # Apply some vertical velocity for hurt state (optional)
-			elif direction == RIGHT:
-				velocity.y = -200  # Apply some vertical velocity for hurt state (optional)
-			elif  direction == LEFT:
-				velocity.y = 200  # Apply some vertical velocity for hurt state (optional)
 			set_life(life - 1)
 			await get_tree().create_timer(0.5).timeout
 			change_state(IDLE)
@@ -172,6 +164,7 @@ func change_state(new_state):
 
 func _physics_process(_delta) -> void:
 	get_input()
+	print(velocity)
 	# Normalize the velocity to ensure consistent speed
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * walk_speed

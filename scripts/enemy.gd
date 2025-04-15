@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 var triggered = false
 var direction: int = 1  # -1 = left, 1 = right
-
+var has_attacked = false
 func _ready() -> void:
 	$AnimatedSprite2D.play("walk")
 func reset():
@@ -30,11 +30,12 @@ func _physics_process(_delta):
 	
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
-		if collision.get_collider().is_in_group("player"):  # Detect player collision
+		if collision.get_collider().is_in_group("player") and not has_attacked:
 			$AnimatedSprite2D.play("attack")
-			reset()
-			collision.get_collider().hurt()  # Call the hurt function on the player
-			break  # Stop checking once the player is hit
+			collision.get_collider().hurt()
+			has_attacked = true
+			print("hurt the player")
+			break
 			
 
 
@@ -55,3 +56,11 @@ func hurt() ->  void:
 
 func disable_collision():
 	collision.disabled = true
+
+
+func _on_timer_timeout() -> void:
+	has_attacked = false
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	$AnimatedSprite2D.play("walk")
